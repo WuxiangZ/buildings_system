@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>型材信息管理系统</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <span class="left">线 密 度 信 息 查 看</span>
+        <span class="right">{{user_info}}</span>
+        <span class="right_right"><a href="#">exit</a></span>
+    </div>
+    <div class="leftside">
+        <ul>
+            <li><a href="/indexop">出入库文件系统</a></li>
+            <li><a href="/informations">型材信息录入</a></li>
+            <li><a href ="/update">型材信息修改</a></li>
+            <li class="first"><a href="#">线密度数据查看</a></li>
+            <li><a href="/search">型材查询</a></li>
+            <li><a href="/history">出入库记录</a></li>
+            <li><a href="/assist">辅助录入系统</a></li>
+            <li><a href="/log4j">日志系统</a></li>
+        </ul>
+
+    </div>
+    <div class="container-fluid">
+        <p class="mi">
+            <span class="half">线密度录入</span>线密度录入
+        </p>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>型材号</th>
+                        <th>线密度</th>
+                        <th>喷涂长度</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <form action="" method="post" onsubmit="return handleSubmit()">
+                            <td><input class="long" name="fn" type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input class="long" name="phy" type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input class="long" name="jeckoff" type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><input class="last" type="submit" value="提交" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><span>提交结果:{{insert_result}}</span></td>
+                        </form>
+                    </tr>
+                    <tr>
+                        <td>型材号</td>
+                        <td>线密度</td>
+                        <td>喷涂长度</td>
+                    </tr>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{result[1]}}</td>
+                        <td>{{result[2]}}</td>
+                        <td>{{result[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

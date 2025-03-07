@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件管理系统</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
+    <style>
+        body {
+            background-image: url("../static/images/234.jpg");
+            background-size: 100%;
+            background-attachment: fixed
+        }
+
+        .elegant-aero {
+            /* margin-right: 500px; */
+            max-width: 500px;
+            background: #D2E9FF;
+            padding: 20px 20px 20px 20px;
+            font: 12px;
+            color: #666;
+            overflow: hidden;
+            font-family: STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑";
+        }
+
+        .elegant-aero h1 {
+            font: 28px;
+            padding: 10px 10px 10px 20px;
+            display: block;
+            background: #C0E1FF;
+            border-bottom: 1px solid #B8DDFF;
+            margin: -20px -20px 15px;
+        }
+
+        .elegant-aero h1>span {
+            display: block;
+            font-size: 16px;
+        }
+
+        .elegant-aero label>span {
+            float: left;
+            margin-top: 12px;
+            font-weight: bold;
+            color: #5E5E5E;
+        }
+
+        .elegant-aero label {
+            display: block;
+            margin: 0px 0px 5px;
+        }
+
+        .elegant-aero label>span {
+            float: left;
+            width: 20%;
+            text-align: right;
+            padding-right: 15px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .elegant-aero input[type="text"],
+        .elegant-aero select {
+            color: #888;
+            width: 70%;
+            padding: 0px 0px 0px 5px;
+            border: 1px solid #C5E2FF;
+            background: #FBFBFB;
+            outline: 0;
+            -webkit-box-shadow: inset 0px 1px 6px #ECF3F5;
+            box-shadow: inset 0px 1px 6px #ECF3F5;
+            font: 200 12px/25px;
+            height: 30px;
+            line-height: 15px;
+            font-weight: bolder;
+            margin: 2px 6px 16px 0px;
+        }
+
+        .elegant-aero select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-indent: 0.01px;
+            text-overflow: '';
+            width: 71% !important;
+        }
+
+        .button {
+            padding: 10px 30px 10px 30px;
+            background: #66C1E4;
+            border: none;
+            color: #FFF;
+            box-shadow: 1px 1px 1px #4C6E91;
+            -webkit-box-shadow: 1px 1px 1px #4C6E91;
+            -moz-box-shadow: 1px 1px 1px #4C6E91;
+            text-shadow: 1px 1px 1px #5079A3;
+        }
+
+        .button:hover {
+            background: #3EB1DD;
+        }
+
+    </style>
+</head>
+<script>
+    // 在防抖函数中第三个参数immediate，可以实现这种效果
+    function debounce(func, delay, immediate) {
+        let timer;
+        return function () {
+            if (timer) clearTimeout(timer);
+            if (immediate) {
+                // 复杂的防抖函数
+                // 判断定时器是否为空，如果为空，则会直接执行回调函数
+                let firstRun = !timer;
+                // 不管定时器是否为空，都会重新开启一个新的定时器,不断输入，不断开启新的定时器，当不在输入的delay后，再次输入就会立即执行回调函数
+                timer = setTimeout(() => {
+                    timer = null;
+                }, delay);
+                if (firstRun) {
+                    func.apply(this, arguments);
+                }
+                // 简单的防抖函数
+            } else {
+                timer = setTimeout(() => {
+                    func.apply(this, arguments);
+                }, delay);
+            }
+        };
+    }
+
+    function submit(e) {
+        console.log(e.target.value);
+    }
+    let input = document.querySelector('#input');
+    window.οnlοad=function(){
+	    input.addEventListener('keyup', debounce(submit, 1500, true));
+    };
+</script>
+
+<body>
+    <div class="container allin">
+        <div class="header">
+            <span class="left">型 材 信 息 变 动</span>
+            <span class="right">Version1.2</span>
+            <span class="right_right"><a href="#">exit</a></span>
+        </div>
+        <div class="leftside">
+            <ul>
+                <li class="first"><a href="#">出入库文件系统</a></li>
+                <li><a href="/informations">型材信息录入</a></li>
+                <li><a href ="/update">型材信息修改</a></li>
+                <li><a href="/destiny">线密度信息查看</a></li>
+                <li><a href="/search">型材信息查询</a></li>
+                <li><a href="/history">出入库记录</a></li>
+                <li><a href="/assist">辅助录入系统</a></li>
+                <li><a href="/log4j">日志系统</a></li>
+            </ul>
+        </div>
+    <div class="container-fluid">
+    <form action="/makefile" method="post" class="elegant-aero"  enctype="multipart/form-data">
+        <h1>上传文件
+            <span>文件上传后位于程序的file目录下</span>
+        </h1>
+        <input type="file" name="file" class="input">
+        <label>
+            <span>选择出入库</span><select name="selection">
+                <option value="0">出库</option>
+                <option value="1">入库</option>
+                <option value="2">导出补料数据</option>
+            </select>
+
+        </label>
+
+        <label>
+            <span>&nbsp;</span>
+            <input class="button" type="submit" value="确定" id="input" />
+            
+        </label>
+        <hr>
+        <span style="font-weight: bold;">操作结果:{{query_result}}&nbsp;&nbsp;&nbsp;</span>
+    </form>
+    <div class="elegant-aero">
+
+        <h2>下载文件</h2>
+        <ol>
+            {% for entry in entries %}
+            <li><a href='/file/download/{{entry}}'>{{entry}}</a>
+                {% endfor %}
+        </ol>
+    </div>
+    </div>
+</div>
+</body>
+
+</html>

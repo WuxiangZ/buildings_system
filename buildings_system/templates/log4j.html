@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>型材信息管理系统</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <span class="left">日志系统</span>
+        <span class="right">{{user_info}}</span>
+        <span class="right_right"><a href="#">exit</a></span>
+    </div>
+    <div class="leftside">
+        <ul>
+            <li><a href="/indexop">出入库文件系统</a></li>
+            <li><a href="/informations">型材信息录入</a></li>
+            <li><a href ="/update">型材信息修改</a></li>
+            <li><a href="/destiny">线密度信息查看</a></li>
+            <li><a href="/search">型材信息查询</a></li>
+            <li><a href="/history">出入库记录</a></li>
+            <li><a href="/assist">辅助录入系统</a></li>
+            <li class="first"><a href="#">日志系统</a></li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <style>
+            .mi{
+               font-family:"微软雅黑";   /*设置字体*/
+               font-size: 40px;   /*设置文字大小*/
+               color:red;    /*设置文字颜色*/
+               text-align: center;  /*设置文字居中*/
+               margin-top: 30px;
+            }
+            .half{
+               height:60px;    /*设置元素高度*/
+               position:absolute;  /*绝对定位*/
+               overflow:hidden;    /*隐藏溢出部分内容*/
+               color:orange;  /*设置文字颜色*/
+            }
+        </style>
+        <p class="mi">
+            <span class="half">入库操作日志</span>入库操作日志
+        </p>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>操作<span></span></th>
+                        <th>操作表名<span></span></th>
+                        <th>操作时间<span></span></th>
+                        <th>是否成功</th>
+                    </tr>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{result[1]}}</td>
+                        <td style="color: red;">{{result[2]}}</td>
+                        <td style="color: rgb(47, 245, 255);">{{result[3]}}</td>
+                        <td style="color: greenyellow;">{{result[4]}}</td>
+                    </tr>
+                    {% endfor %}
+                </thead>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

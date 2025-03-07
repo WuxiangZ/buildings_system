@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>型材信息管理系统</title>
+     <link rel="icon" href="../favicon.ico">
+     <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <span class="left">型 材 信 息 查 询</span>
+        <span class="right">{{user_info}}</span>
+        <span class="right_right"><a href="#">exit</a></span>
+
+    </div>
+    <div class="leftside">
+        <ul>
+            <li><a href="/indexop">出入库文件系统</a></li>
+            <li><a href="/informations">型材信息录入</a></li>
+            <li><a href ="/update">型材信息修改</a></li>
+            <li><a href="/destiny">线密度信息查看</a></li>
+            <li class="first"><a href="#">型材信息查询</a></li>
+            <li><a href="/history">出入库记录</a></li>
+            <li><a href="/assist">辅助录入系统</a></li>
+            <li><a href="/log4j">日志系统</a></li>
+        </ul>
+    </div>
+
+    <div class="container-fluid">
+        <p class="mi">
+            <span class="half">型材信息查询</span>型材信息查询
+        </p>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped" cellspaing="10">
+                <h5>请选择查询的方式:(型材号/规格/材质状态)&nbsp;&nbsp;&nbsp;</h5>
+                <tbody>
+                    <tr>
+                        <form action="" method="post" onsubmit="return handleSubmit()">
+                            <td><select name="selected_one" style="width:100px" disabled>
+                                    <option value="id">id</option>
+                                    <option value="型材号" selected="selected">型材号</option>
+                                    <option value="规格">规格</option>
+                                    <option value="材质状态">材质状态</option>
+                                </select></td>&nbsp;
+                            <td><input class="long" type="text" name="query"  style="width:100px"></td>
+                            <td><select name="selected_two" style="width:100px" disabled>
+                                <option value="id">id</option>
+                                <option value="型材号">型材号</option>
+                                <option value="规格" selected="selected">规格</option>
+                                <option value="材质状态">材质状态</option>
+                            </select></td>&nbsp;
+                            <td><input class="long" type="text" name="query2"  style="width:100px"></td>
+                            <td><input class="last" type="submit" value="查询"  style="width:60px"/></td>
+                            <td"><span>查询结果:{{query_result}}</span></td>
+                        </form>
+                    </tr>
+                    </tbody>
+                    
+                    <tbody>
+                    <tr>
+                        <td>id</td>
+                        <td>型材名称</td>
+                        <td>厂家型材号</td>
+                        <td>材质状态</td>
+                        <td>规格(mm/支) </td>
+                        <td>实际数量(支)</td>
+                        <td>备用数量(支)</td>
+                        <td>总数量(支)</td>
+                        <td>收货地</td>
+                        <td>色号</td>
+                        <td>线密度(Kg/m)</td>
+                        <td>重量(Kg)</td>
+                        <td>喷涂长度(mm)</td>
+                        <td>喷涂面积(平方米)</td>
+                        <td>表面处理方式</td>
+                        <td>备注 </td>
+                    </tr>
+                    
+                    {% for result in results %}
+                    <tr>
+                        <td >{{result[0]}}</td>
+                        <td >{{result[1]}}</td>
+                        <td >{{result[2]}}</td>
+                        <td>{{result[3]}}</td>
+                        <td>{{result[4]}}</td>
+                        <td>{{result[5]}}</td>
+                        <td>{{result[6]}}</td>
+                        <td>{{result[7]}}</td>
+                        <td>{{result[8]}}</td>
+                        <td>{{result[9]}}</td>
+                        <td>{{result[10]}}</td>
+                        <td>{{result[11]}}</td>
+                        <td>{{result[12]}}</td>
+                        <td>{{result[13]}}</td>
+                        <td>{{result[14]}}</td>
+                        <td>{{result[15]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

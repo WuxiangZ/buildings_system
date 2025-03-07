@@ -1,0 +1,17 @@
+序号          sn
+型材名称      name
+厂家型材号    fn
+材质状态      status
+规格(mm/支)   norms
+实际数量(支)  factn
+备用数量(支)  reserven
+总数量(支) totaln
+收货地       destination
+色号           color
+线密度(Kg/m)   density
+重量(Kg)       kg
+喷涂长度(mm)   length
+喷涂面积(平方米)   area
+表面处理方式   mode
+备注          remark
+料单号        bn

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>型材信息管理系统</title>
+    <link rel="icon" href="../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
+
+</head>
+
+<body>
+<div class="container">
+    <div class="header">
+        <span class="left">型材信息辅助录入</span>
+        <span class="right">{{user_info}}</span>
+        <span class="right_right"><a href="#">exit</a></span>
+    </div>
+    <div class="leftside">
+        <ul>
+            <li><a href="/indexop">出入库文件系统</a></li>
+            <li><a href="/informations">型材信息录入</a></li>
+            <li><a href ="/update">型材信息修改</a></li>
+            <li><a href="/destiny">线密度信息查看</a></li>
+            <li><a href="/search">型材信息查询</a></li>
+            <li><a href="/history">出入库记录</a></li>
+            <li class="first"><a href="#">辅助录入系统</a></li>
+            <li><a href="/log4j">日志系统</a></li>
+        </ul>
+    </div>
+    <script></script>
+
+    <div class="container-fluid">
+        <p class="mi">
+            <span class="half">辅助录入系统</span>辅助录入系统
+        </p>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-striped" cellspaing="10">
+                <h5>请选择查询的方式:(型材号/规格/材质状态)&nbsp;&nbsp;&nbsp;</h5>
+                <tbody>
+                    <tr>
+                        <form action="/assist" method="post" onsubmit="return handleSubmit()">
+                            <td><select name="selected_one" style="width:80px" disabled>
+                                    <option value="id">id</option>
+                                    <option value="型材号" selected="selected">型材号</option>
+                                    <option value="规格">规格</option>
+                                    <option value="材质状态">材质状态</option>
+                                </select></td>&nbsp;
+                            <td><input class="long" type="text" name="query"  style="width:100px"></td>
+                            <td><select name="selected_two" style="width:80px" disabled>
+                                <option value="id">id</option>
+                                <option value="型材号">型材号</option>
+                                <option value="规格" selected="selected">规格</option>
+                                <option value="材质状态">材质状态</option>
+                            </select></td>&nbsp;
+                            <td><input class="long" type="text" name="query2"  style="width:100px"></td>
+                            <td><input class="last" type="submit" value="查询"  style="width:60px"/></td>
+                           
+                            <td"><span>查询结果:{{query_result}}</span></td>
+                        </form>
+                    </tr>
+                    </tbody>
+                    
+                    <tbody>
+                    <tr>
+                        <td style="width:80px">id</td>
+                        <td style="width:100px">型材名称</td>
+                        <td style="width:80px">厂家型材号</td>
+                        <td style="width:100px">材质状态</td>
+                        <td style="width:60px">规格(mm) </td>
+                        <td style="width:90px">实际数量(支)</td>
+                        <td style="width:90px">备用数量(支)</td>
+                        <td style="width:60px">总数量(支)</td>
+                        <td style="width:60px">收货地</td>
+                        <td style="width:60px">色号</td>
+                        <td style="width:60px">线密度(Kg/m)</td>
+                        <td style="width:60px">重量(Kg)</td>
+                        <td style="width:60px">喷涂长度(mm)</td>
+                        <td style="width:60px">喷涂面积(平方米)</td>
+                        <td style="width:60px">表面处理方式</td>
+                        <td style="width:60px">备注 </td>
+                    </tr>
+                    {% for result in results %}
+                    <tr class="initdata">
+                        <td class="autoid"><input  class="long " type="text" style="width:80px" value={{result[0]}} disabled readonly></td>
+                        <td><input  class="long" type="text" style="width:100px" value={{result[1]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:80px" value={{result[2]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:100px" value={{result[3]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[4]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:90px" value={{result[5]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:90px" value={{result[6]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[7]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[8]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" disabled value={{result[9]}} ></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[10]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[11]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[12]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[13]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" value={{result[14]}} disabled></td>
+                        <td><input  class="long" type="text" style="width:60px" disabled value={{result[15]}} ></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+            <HR align=center width=60% color=#0ceedb!important SIZE=1>
+                <div style="margin-bottom: 8px;">
+                <span style="font-weight: bold;">辅助录入&nbsp;&nbsp;&nbsp;</span>
+                <td><input onclick = "btncopyData()" class="long" type="button" id="copyline" value="复制搜索内容" style="width:90px;color:rgb(22, 23, 21);font-weight: bold;"/></td>
+                <td><input onclick = "btnSendData()" class="long" type="button" id="allsubmit" value="提交输入内容" style="width:90px;color:rgb(255, 0, 76);font-weight: bold;"/></td>
+            </div>
+        <table class="table table-striped" cellspaing="10">
+            <tbody id="newcontent">
+             <tbody>  
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var thead =  "<tr><td>选择提交</td><td>型材名称</td><td>厂家型材号</td><td>材质状态</td><td>规格(mm) </td> \
+        <td>实际数量(支)</td><td>备用数量(支)</td><td>总数量(支)</td><td>收货地</td>\
+        <td>色号</td><td>线密度(Kg/m)</td><td>重量(Kg)</td><td>喷涂长度(mm)</td>\
+        <td>喷涂面积(平方米)</td><td>表面处理方式</td><td>备注 </td>\
+         </tr>";
+    
+    function btnSendData() {
+        var btns = $('.wangerni'); //checkbox 的索引和fathers瑶瑶回应
+        var grd =  document.getElementById('newcontent');
+        var fathers = grd.getElementsByClassName('newdata');
+        console.log(fathers.length);
+        var datas = [];
+        for(let wn=0;wn<btns.length;wn++){
+            if (btns[wn].checked){
+                //收集点中按钮的数据
+                // console.log(wn);
+                var tmp = [];
+                var inputs =  fathers[wn].getElementsByTagName("input");
+                // console.log(inputs.length);
+                for(let skb=1;skb<inputs.length;skb++){
+                    //console.log(inputs[skb].value);
+                    tmp.push(inputs[skb].value);
+                }
+                datas.push(tmp);
+            }
+        }
+        console.log(datas);
+        $.ajax({
+            url: '/heart',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(datas),
+            success: function (res) {
+                alert(res);
+                location.reload();
+            }
+        });
+    }
+
+    function btncopyData() {
+        var newcontent = document.getElementById('newcontent');
+        newcontent.innerHTML = thead;
+
+        var initdata = document.getElementsByClassName('initdata');
+        console.log(initdata.length);
+        for(let i=0;i<initdata.length;i++){
+            var newinput =  initdata[i].innerHTML.replaceAll("disabled","");
+            newcontent.innerHTML = newcontent.innerHTML+ "<tr class=\"newdata\">" + newinput + "</tr>";
+        }
+
+        var autoid = document.getElementById('newcontent').getElementsByClassName("autoid");
+        
+        console.log(autoid.length);
+        for(let k=0;k<autoid.length;k++){
+            autoid[k].innerHTML = "<input type=\"checkbox\" class=\"wangerni\" style=\"width:80px\"  />";
+        }
+    }
+
+</script>
+
+
+
+</body>
+
+</html>
